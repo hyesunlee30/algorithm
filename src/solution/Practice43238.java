@@ -1,6 +1,8 @@
 package solution;
 
 import java.util.Arrays;
+import java.util.LinkedList;
+import java.util.Queue;
 
 public class Practice43238 {
     public static void main(String[] args) {
@@ -20,31 +22,20 @@ public class Practice43238 {
 
     public long solution(int n, int[] times) {
         long answer = 0;
-
         Arrays.sort(times);
-
         int start = 0;
         int end = n * times[times.length-1];
         int count = n;
+        int time = 0;
 
-        while(true) {
-            int middle = start+end / 2;
-            int temp = middle;
-            int min = times[0];
-            boolean check = false;
+        int middle = (start+end)/2;
 
-            for (int i =0; i<times.length; i++) {
-                count = count - (temp / times[0]);
-                System.out.println(count);
-                System.out.println(times[i]);
-            }
+        for (int i = 0; i < times.length; i++) {
+            int temp = (middle / times[i]);
+            n = n - temp;
+            time += temp * times[i];
 
-
-            if(count < 0) {
-                break;
-            }
         }
-
 
 
         return answer;
