@@ -21,27 +21,30 @@ public class Practice43238 {
     public long solution(int n, int[] times) {
         long answer = 0;
 
+        Arrays.sort(times);
 
         int start = 0;
-        int end = n * Arrays.stream(times).min().getAsInt();
+        int end = n * times[times.length-1];
+        int count = n;
 
-        int time = 0;
         while(true) {
-
             int middle = start+end / 2;
-            if(time == middle) {
+            int temp = middle;
+            int min = times[0];
+            boolean check = false;
+
+            for (int i =0; i<times.length; i++) {
+                count = count - (temp / times[0]);
+                System.out.println(count);
+                System.out.println(times[i]);
+            }
+
+
+            if(count < 0) {
                 break;
             }
-            for (int i = 0; i < n; n++) {
-                for(int j = 0; j < times.length; j++) {
-
-                    if(start < times[j]) {
-                        start += times[j];
-                    }
-
-                }
-            }
         }
+
 
 
         return answer;
