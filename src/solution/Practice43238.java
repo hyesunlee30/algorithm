@@ -15,38 +15,30 @@ public class Practice43238 {
         int[] times = {7, 10};
 
         //28
-        p.solution(n, times);
+        System.out.println(p.solution(n, times));
+
     }
 
     public long solution(int n, int[] times) {
         long answer = 0;
-
         Arrays.sort(times);
 
-        int start = 0;
+        int start = 1;
         int end = n * times[times.length-1];
-        int count = n;
-
-        while(true) {
-            int middle = start+end / 2;
-            int temp = middle;
-            int min = times[0];
-            boolean check = false;
-
-            for (int i =0; i<times.length; i++) {
-                count = count - (temp / times[0]);
-                System.out.println(count);
-                System.out.println(times[i]);
+        int middle = (start+ end) / 2;
+        int count = 0;
+        for(int i = start; i <= end; i++) {
+            for(int j = 0; j<times.length; j++) {
+                if(i%times[j] == 0) {
+                    count++;
+                    System.out.println("times[j] "+times[j]+" i "+i);
+                }
             }
-
-
-            if(count < 0) {
+            if( count == n ) {
+                answer = Long.valueOf(i);
                 break;
             }
         }
-
-
-
         return answer;
     }
 }
