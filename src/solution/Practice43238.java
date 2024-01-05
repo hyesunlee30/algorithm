@@ -13,35 +13,64 @@ public class Practice43238 {
         // 더 짧아 하면 또 짤라 들어가는 거다.
 
         Practice43238 p = new Practice43238();
-        int n = 6;
-        int[] times = {7, 10};
+//        int n = 6;
+//        int[] times = {7, 10};
+//
+//        //28
+//        System.out.println(p.solution(n, times));
 
-        //28
+//        int n = 59;
+//        int [] times={1,1};
+//        //30
+//        System.out.println(p.solution(n, times));
+
+        //solution(6, [6,10]) : 24
+        int n = 6;
+        int[] times = {6,10};
         System.out.println(p.solution(n, times));
 
+        //solution(6, [8,10]) : 30
+//        int n = 6;
+//        int[] times = {8,10};
+//        System.out.println(p.solution(n, times));
+
+        //solution(6, [4,10]) : 20
+        //solution(11, [3,4,10]) : 18
+        //solution(5, [1,1,10]) :
     }
 
     public long solution(int n, int[] times) {
         long answer = 0;
         Arrays.sort(times);
-
-        int start = 1;
-        int end = n * times[times.length-1];
-        int middle = (start+ end) / 2;
-        int count = 0;
-        for(int i = start; i <= end; i++) {
-            for(int j = 0; j<times.length; j++) {
-                if(i%times[j] == 0) {
-                    count++;
-                    System.out.println("times[j] "+times[j]+" i "+i);
-                }
-            }
-            if( count == n ) {
-                answer = Long.valueOf(i);
+        long start = 0;
+        long end = (long)times[times.length-1] * n;
+        long middle;
+        while (true) {
+            middle = (start+ end) / 2;
+            if(start > end) {
                 break;
             }
-        }
+            long count = 0;
 
-        return answer;
+
+            for(int j = 0; j <times.length; j++) {
+
+            }
+
+
+            if(count == n) {
+                break;
+            }
+
+            if(count > n) {
+                end = middle-1;
+            }
+
+            if(count < n) {
+                start = middle+1;
+            }
+
+        }
+        return middle;
     }
 }
