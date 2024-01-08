@@ -6,7 +6,7 @@ public class BinarySearch {
         //정렬이 돼 있어야 이분탐색 가능
         Arrays.sort(arr);
 
-        int find = 12;
+        int find = 13;
 
         int start = 0;
 
