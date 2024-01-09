@@ -30,9 +30,11 @@ public class WordConversion_43163 {
     }
 
     public void DFS(int start) {
-
+        String[] beginArr = begin.split("");
         visited[start] = true;
-        for (int i = 0; i < words.length; i++){
+        for (int i = 1; i < words.length; i++){
+            String[] wordsArr = words[i].split("");
+
             if(visited[i] == false) {
                 visited[i] = true;
                 DFS(i);
