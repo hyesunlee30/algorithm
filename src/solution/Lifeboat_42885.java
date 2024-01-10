@@ -1,13 +1,11 @@
 package solution;
 
-import java.util.Arrays;
-import java.util.LinkedList;
-import java.util.PriorityQueue;
-import java.util.Queue;
+import java.util.*;
 
 public class Lifeboat_42885 {
     public static void main(String[] args) {
         Lifeboat_42885 m = new Lifeboat_42885();
+        //100 - 큰값 빼고 남은 값을 서칭해야한다
 //        int [] people = {70, 50, 80, 50};
 //        int limit = 100;
 //        //3
@@ -22,14 +20,17 @@ public class Lifeboat_42885 {
         int answer = people.length;
         Arrays.sort(people);
 
-        Queue queue = new LinkedList();
-        for (int i = 0; i < people.length; i++) {
+        List<Integer> boat = new ArrayList<>();
+        int sum = 0;
+        for (int i =0; i< people.length; i++) {
+            boat.add(people[i]);
+            if(i != 0) {
 
 
-            queue.add(people[i]);
-
+            }
 
         }
+
         return answer;
     }
 }
