@@ -5,6 +5,7 @@ import java.util.*;
 
 public class Practice178870 {
     public static void main(String[] args) {
+        //연속된 부분수열의 합
         //비내림차순으로 정렬된 수열
 
         //슬라이딩 윈도우(Sliding Window)
@@ -15,49 +16,41 @@ public class Practice178870 {
 //        int k = 7;
 //        //[2, 3]
 //
-//        System.out.println(Arrays.toString(p.solution(sequence, k)));
+//        System.out.println(Arrays.toString(p.solution0(sequence, k)));
 
-//        int[] sequence = {1, 1, 1, 2, 3, 4, 5};
-//        int k = 5;
-//        //[6, 6]
-//        //p.solution(sequence, k);
-//        System.out.println(Arrays.toString(p.solution(sequence, k)));
-
-        int[] sequence = {2, 2, 2, 2, 2};
-        int k = 6;
-        //[0, 2]
+        int[] sequence = {1, 1, 1, 2, 3, 4, 5};
+        int k = 5;
+        //[6, 6]
         //p.solution(sequence, k);
         System.out.println(Arrays.toString(p.solution0(sequence, k)));
+
+//        int[] sequence = {2, 2, 2, 2, 2};
+//        int k = 6;
+//        //[0, 2]
+//        //p.solution(sequence, k);
+//        System.out.println(Arrays.toString(p.solution0(sequence, k)));
     }
 
     public int[] solution0(int[] sequence, int k) {
-
-        int start = 0;
-        int end = 0;
-        int sum = sequence[start] + sequence[end];
-        int cnt = 0;
-
-        while (end < sequence.length) {
-
-            //[start, end] → [start, end+1] → [start+1, end+1]
-
-            if(sum == k) {
-                cnt++;
-            } else if (sum < k) {
-                sum = sequence[start] + sequence[end+1];
-            } else {
-                sum = sequence[start+1] + sequence[end];
-            }
-
-            System.out.println("start "+start);
-            System.out.println("end "+end);
-        }
-
         int[] answer = new int[2];
-
-
-//        answer[0] = answer1.get(0);
-//        answer[1] = answer1.get(answer1.size()-1);
+        int sum = 0;
+        int start = 0;
+        int min = Integer.MAX_VALUE;
+        for(int end = 0; end < sequence.length; end++) {
+            sum += sequence[end];
+            while (sum >  k) {
+                sum -= sequence[start];
+                start++;
+            }
+            if (sum == k) {
+                int size = end - start;
+                if(min > size) {
+                    min = end-start;
+                    answer[0] = start;
+                    answer[1] = end;
+                }
+            }
+        }
 
         return answer;
     }
