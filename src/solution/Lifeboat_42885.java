@@ -3,9 +3,11 @@ package solution;
 import java.util.*;
 import java.util.stream.Collectors;
 
+
 public class Lifeboat_42885 {
     public static void main(String[] args) {
         Lifeboat_42885 m = new Lifeboat_42885();
+        //100 - 큰값 빼고 남은 값을 서칭해야한다
 //        int [] people = {70, 50, 80, 50};
 //        int limit = 100;
 //        //3
@@ -29,37 +31,18 @@ public class Lifeboat_42885 {
         //내림차순 먼저 태울 사람
         List<Integer> reversSortedPeople = Arrays.stream(people).boxed().sorted(Comparator.reverseOrder()).collect(Collectors.toList());
 
-        List<Queue<Integer>> boatList = new ArrayList<>();
-        int idx = 0;
-        while (!reversSortedPeople.isEmpty()){
-            PriorityQueue<Integer> boat = new PriorityQueue<>();
-            boat.add(reversSortedPeople.get(idx)); //먼저 태우기
-            System.out.println(" "+reversSortedPeople.get(idx));
 
-            int remainLimit = limit - boat.peek(); // 첫번쨰 탑승자 타고 남은 키로
-            System.out.println("remainLimit "+remainLimit);
-            List<Queue<Integer>> remainarr = new ArrayList<>();
+        List<Integer> boat = new ArrayList<>();
+        int sum = 0;
+        for (int i =0; i< people.length; i++) {
+            boat.add(people[i]);
+            if(i != 0) {
 
-            boolean[] visited = new boolean[reversSortedPeople.size()];
-            visited[idx] = true;
-            for (int i = 0; i < reversSortedPeople.size(); i++) {
-                if(remainLimit >= reversSortedPeople.get(i) && !visited[i]) {
-                    visited[i] = true;
-                }
+
             }
-            reversSortedPeople.remove(idx); // 0번째 삭제
-
-
-            boatList.add(boat);
-            System.out.println("remainarr "+boatList);
-            for (Integer i : boat) {
-                reversSortedPeople.remove(i);
-            }
-
 
         }
 
-        answer = boatList.size();
         return answer;
     }
 }
