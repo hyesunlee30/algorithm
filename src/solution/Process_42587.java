@@ -86,8 +86,8 @@ public class Process_42587 {
     }
 }
 class Process {
-    int name;
-    int priorities;
+    int name; //idex
+    int priorities; //우선순위
 
     Process(int name, int priorities) {
         this.name = name;
