@@ -1,5 +1,10 @@
 package solution;
 
+import java.util.LinkedList;
+import java.util.Queue;
+import java.awt.Point;
+import java.util.*;
+
 public class TruckPassingOverTheBridge_42583 {
     public static void main(String[] args) {
         //https://school.programmers.co.kr/learn/courses/30/lessons/42583
@@ -17,7 +22,49 @@ public class TruckPassingOverTheBridge_42583 {
     }
 
     public int solution(int bridge_length, int weight, int[] truck_weights) {
-        int answer = 0;
+
+        Queue<Integer> waitQueue = new LinkedList<>();
+        Queue<Point> onBridgeQueue = new LinkedList<>();
+
+        //트럭 들어오세요 주차중
+        for (int i = 0; i <truck_weights.length; i++) {
+            waitQueue.offer(i);
+        }
+
+        int leftWeight = weight;
+        int time = 0;
+
+        while(!waitQueue.isEmpty()) {
+            if(leftWeight >= waitQueue.peek()) {
+                int truck =waitQueue.poll();
+                onBridgeQueue.offer(new Point(truck,time+bridge_length));
+                leftWeight = leftWeight - truck;
+            }
+            while(!onBridgeQueue.isEmpty()){
+                int nextWaitQueue = weight;
+                if(!waitQueue.isEmpty()) {
+                    nextWaitQueue = waitQueue.peek();
+                }
+                if(leftWeight >= nextWaitQueue) {
+                    break;
+                }
+                else
+                {
+                    time++;
+                    Point next = onBridgeQueue.peek();
+                    int x = (int)next.getX();
+                    int y = (int)next.getY();
+                    if(time >= y) {
+                        onBridgeQueue.poll();
+                        leftWeight = leftWeight + x;
+                    }
+                }
+            }
+        }
+
+
+        int answer = time+1;
+
         return answer;
     }
 
