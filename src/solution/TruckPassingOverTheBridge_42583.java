@@ -1,25 +1,12 @@
 package solution;
 
+import java.util.Arrays;
+import java.util.LinkedList;
+import java.util.Map;
+import java.util.Queue;
+
 public class TruckPassingOverTheBridge_42583 {
-    public static void main(String[] args) {
-        //https://school.programmers.co.kr/learn/courses/30/lessons/42583
-        TruckPassingOverTheBridge_42583 c = new TruckPassingOverTheBridge_42583();
 
-        // 다리에 올라갈 수 있는 트럭 수
-        int bridge_length = 2;
-        //다리가 견딜 수 있는 무게
-        int weight = 10;
-        //트럭 별 무게
-        int[] truck_weights = {7,4,5,6};
-        //8
-        System.out.println(c.solution(bridge_length,weight, truck_weights));
-
-    }
-
-    public int solution(int bridge_length, int weight, int[] truck_weights) {
-        int answer = 0;
-        return answer;
-    }
 
 
 }
