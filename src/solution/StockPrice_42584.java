@@ -9,11 +9,7 @@ public class StockPrice_42584 {
         //https://school.programmers.co.kr/learn/courses/30/lessons/42584
         //가격이 떨어지지 않은 기간
 
-        //1초 시점의 ₩1은 끝까지 가격이 떨어지지 않았습니다.
-        //2초 시점의 ₩2은 끝까지 가격이 떨어지지 않았습니다.
-        //3초 시점의 ₩3은 1초뒤에 가격이 떨어집니다. 따라서 1초간 가격이 떨어지지 않은 것으로 봅니다.
-        //4초 시점의 ₩2은 1초간 가격이 떨어지지 않았습니다.
-        //5초 시점의 ₩3은 0초간 가격이 떨어지지 않았습니다.
+        //애초에 시작위치에서 그 이후로 한번이라도 떨어졌으면 그 다음에는 계산할 필요가 없습니다.
         StockPrice_42584 c = new StockPrice_42584();
 //        int[] prices = {1, 2, 3, 2, 3};
 //        //[4, 3, 1, 1, 0]
@@ -41,26 +37,26 @@ public class StockPrice_42584 {
         }
         int[] answer = new int[prices.length];
         int idx = 0;
+        int idx2 = 0;
+
         while (!queue.isEmpty()) {
             int nowPrice = queue.poll();
             int cnt = 0;
-            int nextIdx =0;
-            for (Integer nextQueue : queue) {
-                nextIdx++;
-                int left = nowPrice - nextQueue;
-                if(left <= 0) {
-                    cnt++;
-
-                }
-                if(left > 0 && nextIdx == queue.size()) {
-                    cnt++;
-                }
-                System.out.println("nowPrice "+nowPrice+" nextQueue "+nextQueue+" cnt "+cnt+" left "+left);
-
-            }
-            answer[idx] = cnt;
-
             idx++;
+            for (int i = idx; i<prices.length; i++) {
+
+                if (nowPrice > prices[i]) {
+                    cnt++;
+                    break;
+                } else if(nowPrice <= prices[i]) {
+                    cnt++;
+                    System.out.println("nowPrice "+nowPrice+" prices[i] "+prices[i]);
+                }
+            }
+
+            answer[idx2] = cnt;
+            idx2++;
+
         }
 
         return answer;
