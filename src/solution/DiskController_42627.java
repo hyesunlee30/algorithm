@@ -1,5 +1,7 @@
 package solution;
 
+import java.util.PriorityQueue;
+
 public class DiskController_42627 {
     public static void main(String[] args) {
         //heap
@@ -14,11 +16,69 @@ public class DiskController_42627 {
         //2ms 시점에 6ms 걸리는 작업 요청이 들어옵니다.
         DiskController_42627 c = new DiskController_42627();
         int[][] jobs ={{0, 3}, {1, 9}, {2, 6}};
+        System.out.println(c.solution(jobs));
     }
 
     public int solution(int[][] jobs) {
+
+        PriorityQueue<Job> pq = new PriorityQueue<>();
+        for (int i = 0; i< jobs.length; i++) {
+            Job job = new Job(jobs[i][0],jobs[i][1]);
+            pq.offer(job);
+        }
+
+
+        while (!pq.isEmpty()){
+
+            Job nowJobPeek = pq.peek();
+            Job nowJobPoll = pq.peek();
+            System.out.println(" >> "+nowJobPeek);
+
+
+        }
+
         int answer = 0;
         return answer;
     }
 
+}
+
+class Job implements Comparable<Job>{
+    int start;
+    int time;
+
+    Job(int start, int time){
+        this.start = start;
+        this.time = time;
+    }
+
+    public int getStart() {
+        return start;
+    }
+
+    public void setStart(int start) {
+        this.start = start;
+    }
+
+    public int getTime() {
+        return time;
+    }
+
+    public void setTime(int time) {
+        this.time = time;
+    }
+
+
+    @Override
+    public int compareTo(Job o) {
+        return Integer.compare(this.getTime(), o.getTime());
+    }
+
+    @Override
+    public String toString() {
+        return "Job{" +
+                "start=" + start +
+                ", time=" + time +
+                '}';
+    }
 }
