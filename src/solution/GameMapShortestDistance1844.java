@@ -1,15 +1,17 @@
 package solution;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
+import java.util.*;
 
 public class GameMapShortestDistance1844 {
+    //https://school.programmers.co.kr/learn/courses/30/lessons/1844
 
+    public static int n, m;
+    public static int answer = -1;
+    public static int[] dx = {-1, 1, 0, 0};
+    public static int[] dy = {0, 0, -1, 1};
 
-    static List<List<Integer>> adjList; // 인접리스트
-    static boolean[] visited;
-    static int[] distance; // 각 노드가 얼마나 떨어져 있는지 담을 것이다.
+    public static boolean visited[][];
+
     public static void main(String[] args) {
         GameMapShortestDistance1844 t = new GameMapShortestDistance1844();
         int[][] maps = {
@@ -20,64 +22,58 @@ public class GameMapShortestDistance1844 {
                 {0,0,0,0,1}};
 
 
-        t.solution(maps);
+        System.out.println(t.solution(maps));
     }
     public int solution(int[][] maps) {
-        int answer = 0;
-        int node_n = maps.length;
-        visited = new boolean[node_n]; // node의 갯수만큼 초기화
-        adjList = new ArrayList<>();
+        n = maps.length;
+        m = maps[0].length;
 
-        for(int i = 0; i<=node_n; i++) {
-            adjList.add(new ArrayList<>());
-        }
-        int[] dx = {-1,1,0,0};
-        int[] dy = {0,0,-1,1};
+        visited = new boolean[n][m];
 
-        List<XY> xyList = new ArrayList<>();
-        for(int i=0; i<node_n; i++){ // 3==(높이길이-행의개수)
-            for(int j=0; j<node_n; j++) { //5==(가로길이-열의개수
-                if(maps[i][j] == 1) {
-                    XY xy = new XY(i,j);
-                    xyList.add(xy);
-                }
+        return bfs(0, 0, maps);
+    }
+
+
+    public int bfs(int x, int y, int[][] maps) {
+        Queue<int[]> queue = new LinkedList<>();
+        queue.add(new int[]{x,y,1}); //x,y,count
+
+        visited[0][0] = true;
+
+        while (!queue.isEmpty()) {
+            int temp[] = queue.poll(); // 첫번째 경로 나옴
+            x = temp[0];
+            y = temp[1];
+            int count = temp[2];
+
+            //마지막일때 끝
+            if(x == n-1 && y == m-1) {
+                answer = count;
+                break;
             }
-        }
-        for (int i = 0; i < xyList.size(); i++) {
-            for(int d=0; d<4; d++){
-                int target_i = xyList.get(i).x+dx[d];
-                int target_j = xyList.get(i).y+dy[d];
-                if(target_i>0 && target_i<node_n && target_j>0 && target_j<node_n){
-                    List<XY> list = new ArrayList<>();
-                    list.add(xyList.get(i));
-                    list.add(new XY(target_i,target_j));
-                    addEdge(list);
+
+            //동서남북
+            for (int i = 0; i <4; i++) {
+                int nx = x + dx[i];
+                int ny = y + dy[i];
+
+                if(nx < 0 || nx >= n || ny < 0 || ny >= m) {
+                    continue;
                 }
+                if(maps[nx][ny] == 0) {
+                    continue;
+                }
+                if(!visited[nx][ny] && maps[nx][ny] == 1) {
+                    visited[nx][ny] = true;
+                    queue.add(new int[]{nx, ny, count+1});
+                }
+
             }
+
+
         }
 
-        distance = new int[maps.length];
-        //int end = 5;
-        //int shortest = bfs(0, end);
-        //System.out.println(shortest);
+
         return answer;
-    }
-
-    static void addEdge(List<XY> list) {
-
-//        adjList.get(list.get(0)).add(list.get(1)); // 단방향
-//        adjList.get(list.get(1)).add(list.get(0)); // 양방향
-
-
-    }
-
-}
-
-class XY {
-    int x;
-    int y;
-    XY(int x, int y){
-        this.x =x;
-        this.y =y;
     }
 }
