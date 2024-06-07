@@ -49,11 +49,11 @@ public class MineralMining_172927 {
         int total = Math.min(minerals.length/5+1,picks[0]+picks[1]+picks[2]);
 
         int[][] mineralGroup = new int[total][3];
-        int dimond=0;
-        int iron=0;
-        int ston=0;
+        int diamond = 0;
+        int iron = 0;
+        int stone = 0;
 
-        for(int i=0; i<minerals.length; i+=5){
+        for (int i =0; i<minerals.length; i+=5) {
             if(i/5==total){
                 break;
             }
@@ -61,19 +61,19 @@ public class MineralMining_172927 {
 
                 String m = minerals[j];
                 if(m.equals("diamond")){
-                    dimond += 1;
+                    diamond  += 1;
                     iron += 5;
-                    ston += 25;
+                    stone += 25;
                 }
                 else if(m.equals("iron")){
-                    dimond += 1;
+                    diamond  += 1;
                     iron += 1;
-                    ston += 5;
+                    stone += 5;
                 }
                 else{
-                    dimond += 1;
+                    diamond  += 1;
                     iron += 1;
-                    ston += 1;
+                    stone += 1;
                 }
 
                 if(j==minerals.length-1){
@@ -82,13 +82,13 @@ public class MineralMining_172927 {
 
             }
 
-            mineralGroup[i/5][0] = dimond;
+            mineralGroup[i/5][0] = diamond ;
             mineralGroup[i/5][1] = iron;
-            mineralGroup[i/5][2] = ston;
+            mineralGroup[i/5][2] = stone;
 
-            dimond = 0;
+            diamond  = 0;
             iron = 0;
-            ston = 0;
+            stone = 0;
         }
 
 
