@@ -33,6 +33,7 @@ public class MazeNavigation {
     }
 
     public static void main(String[] args) throws IOException {
+        //10. 미로탐색(DFS)
         //7*7 격자판 미로를 탈출하는 경로의 가지수를 출력하는 프로그램을 작성하세요
         //출발점 격자의 (1,1), 탈출 도착점은 (7,7) 좌표이다.
         // 격자판의 1은 벽이고, 0은 통로이다. 격자판의 움직움은 상하좌우로만 움직인다.
